@@ -76,10 +76,13 @@ napi_value readStart(napi_env env, const napi_callback_info info){
         napi_value argv[2];
         status = napi_get_null(env, &argv[0]); // TBD: add error handling
         /* status = napi_create_uint32(env, (uint32_t)baton->device_buffer, &argv[1]); */
-        size_t byte_length = 1;
-        uint8_t** data(nullptr);
-        status = napi_create_arraybuffer(env, byte_length, (void**)data, &argv[1]);
-        *data[0] = baton->device_buffer;
+
+            printf("afterRead: buffer = %d\n", baton->device_buffer);
+        uint8_t data[1] = {baton->device_buffer};
+        napi_value arraybuffer;
+        status = napi_create_arraybuffer(env, (size_t)1, (void**)&data, &arraybuffer);
+            printf("afterRead: buffer = %d\n", baton->device_buffer);
+        status = napi_create_typedarray(env, napi_uint8_array, (size_t)1, arraybuffer, (size_t)0, &argv[1]);
             printf("afterRead: buffer = %d\n", baton->device_buffer);
 
         napi_value global;

@@ -9,7 +9,7 @@ class SourceWrapper extends Readable {
 
     // Every time there's data, push it into the internal buffer.
     let _this = this;
-    this._source.onData(function(chunk){
+    this._source.onData(function(err, chunk){
       // if push() returns false, then stop reading from source
       let uint8View = new Uint8Array(chunk);
       console.log("onData = ", chunk, uint8View);
