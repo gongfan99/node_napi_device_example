@@ -1,17 +1,12 @@
-const my_module = require('bindings')('simple-device-example'),
+const my_class = require('../index'),
 	assert = require('assert');
 
+let my_module = new my_class({highWaterMark: 1000});
 try {
-  my_module.onData(function(err, chunk){
+  my_module.on('data', function(chunk){
     console.log("chunk = ", chunk);
   });
   
-  my_module.readStart();
-  
-  setTimeout(function(){
-    my_module.readStop();
-  }, 3000)
-
 } catch (err){
   console.log(err.message);
 }
