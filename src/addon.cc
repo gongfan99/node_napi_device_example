@@ -75,15 +75,11 @@ napi_value readStart(napi_env env, const napi_callback_info info){
         size_t argc = 2;
         napi_value argv[2];
         status = napi_get_null(env, &argv[0]); // TBD: add error handling
-        /* status = napi_create_uint32(env, (uint32_t)baton->device_buffer, &argv[1]); */
-
-            printf("afterRead: buffer = %d\n", baton->device_buffer);
-        uint8_t data[1] = {baton->device_buffer};
+        uint8_t* data;
         napi_value arraybuffer;
         status = napi_create_arraybuffer(env, (size_t)1, (void**)&data, &arraybuffer);
-            printf("afterRead: buffer = %d\n", baton->device_buffer);
+        data[0] = baton->device_buffer;
         status = napi_create_typedarray(env, napi_uint8_array, (size_t)1, arraybuffer, (size_t)0, &argv[1]);
-            printf("afterRead: buffer = %d\n", baton->device_buffer);
 
         napi_value global;
         status = napi_get_global(env, &global);
@@ -145,7 +141,7 @@ napi_value readStop(napi_env env, const napi_callback_info info){
     }
   );  
 
-            printf("readStop: called %d\n", 0);
+  printf("readStop: called %d\n", 0);
   return nullptr;
 }
 

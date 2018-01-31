@@ -1,10 +1,8 @@
-# node_napi_promise_example
-An node extension example with napi for promise
+# node_napi_device_example
+An node extension example with napi for device
 
 # Introduction
-This is a simple example for node native extension with napi. It asynchronously multiplies two numbers and outputs the result.
-
-This is to give everybody a starting point to work on because I could not find a complete example for promise implementation with napi.
+This is a simple example for node native extension with napi.
 
 It has been tested on my Win7 local machine.
 
